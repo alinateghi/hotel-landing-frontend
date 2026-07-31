@@ -4,14 +4,19 @@ import SpaIcon from '@mui/icons-material/SelfImprovement'
 import WaterDropIcon from '@mui/icons-material/WaterDrop'
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist'
 import Reveal from './Reveal'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const rituals = [
-  { icon: <SpaIcon />, name: 'Forest Bathing Massage', time: '75 min' },
-  { icon: <WaterDropIcon />, name: 'Thermal Water Ritual', time: '90 min' },
-  { icon: <LocalFloristIcon />, name: 'Botanical Facial', time: '60 min' },
-]
+interface Ritual {
+  name: string
+  time: string
+}
+
+const icons = [<SpaIcon key="spa" />, <WaterDropIcon key="water" />, <LocalFloristIcon key="flower" />]
 
 export default function Spa() {
+  const { t } = useLanguage()
+  const rituals = t<Ritual[]>('spa.rituals')
+
   return (
     <Box
       id="spa"
@@ -26,7 +31,6 @@ export default function Spa() {
         py: { xs: 12, md: 0 },
       }}
     >
-      {/* soft flowing light shapes evoking water & steam */}
       {[0, 1, 2].map((i) => (
         <Box
           key={i}
@@ -40,7 +44,7 @@ export default function Spa() {
             borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(228,200,138,0.18), transparent 70%)',
             top: `${10 + i * 25}%`,
-            left: `${60 + i * 8}%`,
+            insetInlineStart: `${60 + i * 8}%`,
             filter: 'blur(20px)',
           }}
         />
@@ -50,18 +54,16 @@ export default function Spa() {
         <Grid container spacing={6} alignItems="center">
           <Grid item xs={12} md={6}>
             <Reveal>
-              <Typography className="eyebrow" sx={{ mb: 2 }}>Spa &amp; Wellness</Typography>
+              <Typography className="eyebrow" sx={{ mb: 2 }}>{t('spa.eyebrow')}</Typography>
             </Reveal>
             <Reveal delay={0.1}>
               <Typography variant="h2" sx={{ fontSize: { xs: '2.4rem', md: '3.6rem' }, mb: 3 }}>
-                Stillness, drawn from the forest.
+                {t('spa.title')}
               </Typography>
             </Reveal>
             <Reveal delay={0.2}>
               <Typography variant="body1" sx={{ color: 'text.secondary', fontSize: '1.05rem', lineHeight: 1.85, maxWidth: 480 }}>
-                Beneath the lobby's timber canopy, our spa unfolds across candlelit thermal
-                pools, a private hammam, and treatment rooms scented with cedar and wild fig —
-                a quiet counterpoint to the world outside.
+                {t('spa.description')}
               </Typography>
             </Reveal>
           </Grid>
@@ -92,7 +94,7 @@ export default function Spa() {
                         flexShrink: 0,
                       }}
                     >
-                      {r.icon}
+                      {icons[i % icons.length]}
                     </Box>
                     <Box sx={{ flexGrow: 1 }}>
                       <Typography variant="h6" sx={{ fontSize: '1.15rem' }}>{r.name}</Typography>

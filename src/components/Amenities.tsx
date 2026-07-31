@@ -6,25 +6,34 @@ import WifiIcon from '@mui/icons-material/Wifi'
 import PetsIcon from '@mui/icons-material/Pets'
 import RoomServiceIcon from '@mui/icons-material/RoomService'
 import Reveal from './Reveal'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const items = [
-  { icon: <FitnessCenterIcon />, title: 'Private Fitness Studio', desc: 'Open 24 hours, with in-room training available.' },
-  { icon: <LocalBarIcon />, title: 'Rooftop Bar', desc: 'Seasonal cocktails above the treeline at dusk.' },
-  { icon: <RoomServiceIcon />, title: '24-Hour In-Room Dining', desc: 'A quiet knock, any hour of the night.' },
-  { icon: <DirectionsCarIcon />, title: 'Private Chauffeur', desc: 'Airport transfers in a fleet of electric vehicles.' },
-  { icon: <WifiIcon />, title: 'Seamless Connectivity', desc: 'Fibre-speed Wi-Fi throughout the residence.' },
-  { icon: <PetsIcon />, title: 'Welcoming to Companions', desc: 'A bed, bowl, and treat await your travel companion.' },
+interface Amenity {
+  title: string
+  desc: string
+}
+
+const icons = [
+  <FitnessCenterIcon key="fitness" />,
+  <LocalBarIcon key="bar" />,
+  <RoomServiceIcon key="service" />,
+  <DirectionsCarIcon key="car" />,
+  <WifiIcon key="wifi" />,
+  <PetsIcon key="pets" />,
 ]
 
 export default function Amenities() {
+  const { t } = useLanguage()
+  const items = t<Amenity[]>('amenities.items')
+
   return (
     <Box id="amenities" component="section" sx={{ background: '#171613', py: { xs: 12, md: 18 }, px: { xs: 3, md: 8 } }}>
       <Reveal>
-        <Typography className="eyebrow" sx={{ mb: 2 }}>Hotel Facilities</Typography>
+        <Typography className="eyebrow" sx={{ mb: 2 }}>{t('amenities.eyebrow')}</Typography>
       </Reveal>
       <Reveal delay={0.1}>
         <Typography variant="h2" sx={{ fontSize: { xs: '2.4rem', md: '3.6rem' }, mb: { xs: 6, md: 9 }, maxWidth: 720 }}>
-          Every comfort, quietly arranged.
+          {t('amenities.title')}
         </Typography>
       </Reveal>
 
@@ -47,7 +56,7 @@ export default function Amenities() {
                   },
                 }}
               >
-                <Box sx={{ color: '#E4C88A', mb: 2.5, fontSize: '1.8rem', display: 'flex' }}>{item.icon}</Box>
+                <Box sx={{ color: '#E4C88A', mb: 2.5, fontSize: '1.8rem', display: 'flex' }}>{icons[i % icons.length]}</Box>
                 <Typography variant="h6" sx={{ fontSize: '1.2rem', mb: 1 }}>{item.title}</Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.7 }}>{item.desc}</Typography>
               </Box>

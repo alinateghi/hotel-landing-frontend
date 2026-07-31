@@ -2,14 +2,16 @@ import { useRef } from 'react'
 import { Box, Typography, Button, Stack } from '@mui/material'
 import { motion } from 'framer-motion'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useScrollScene } from '../hooks/useGsap'
 import images from '../assets/images'
-
-const headline = ['A Quiet', 'Kind of', 'Luxury.']
+import { useLanguage } from '../i18n/LanguageContext'
 
 export default function Hero() {
   const rootRef = useRef<HTMLElement>(null!)
   const imgRef = useRef<HTMLDivElement>(null!)
+  const { t, language } = useLanguage()
+  const headline = t<string[]>('hero.headline')
 
   useScrollScene(rootRef, ({ gsap, ScrollTrigger }) => {
     // Parallax + slow zoom on the hero image as the visitor "walks in"
@@ -89,7 +91,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.2 }}
         >
           <Typography className="eyebrow" sx={{ mb: 2 }}>
-            Aurelia Hotel &amp; Residences
+            {t('hero.eyebrow')}
           </Typography>
         </motion.div>
 
@@ -124,7 +126,6 @@ export default function Hero() {
           <Typography
             variant="h6"
             sx={{
-              fontFamily: '"Inter", sans-serif',
               fontWeight: 300,
               color: 'rgba(247,244,238,0.78)',
               maxWidth: 480,
@@ -132,8 +133,7 @@ export default function Hero() {
               fontSize: { xs: '1rem', md: '1.15rem' },
             }}
           >
-            Nestled between old cedar and quiet water, Aurelia is an invitation to slow down —
-            where every room, every meal, every hour is composed with care.
+            {t('hero.description')}
           </Typography>
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ xs: 'stretch', sm: 'center' }}>
@@ -144,7 +144,7 @@ export default function Hero() {
               href="#booking"
               variant="contained"
               size="large"
-              endIcon={<ArrowForwardIcon />}
+              endIcon={language === 'fa' ? <ArrowBackIcon /> : <ArrowForwardIcon />}
               sx={{
                 background: 'linear-gradient(135deg, #E4C88A, #C6A25C)',
                 color: '#171613',
@@ -153,7 +153,7 @@ export default function Hero() {
                 '&:hover': { background: 'linear-gradient(135deg, #F0DBAA, #D3AE6C)' },
               }}
             >
-              Reserve Your Stay
+              {t('hero.cta')}
             </Button>
             <Button
               href="#about"
@@ -161,7 +161,7 @@ export default function Hero() {
               size="large"
               sx={{ color: '#F7F4EE', opacity: 0.85 }}
             >
-              Discover the Hotel
+              {t('hero.secondaryCta')}
             </Button>
           </Stack>
         </motion.div>
@@ -188,7 +188,7 @@ export default function Hero() {
           }}
         />
         <Typography sx={{ fontSize: '0.7rem', letterSpacing: '0.2em', opacity: 0.6, writingMode: 'vertical-rl' }}>
-          SCROLL
+          {t('hero.scroll')}
         </Typography>
       </Stack>
     </Box>

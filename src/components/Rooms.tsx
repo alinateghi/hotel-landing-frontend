@@ -1,41 +1,34 @@
 import { Box, Typography, Stack, Chip } from '@mui/material'
 import Reveal from './Reveal'
 import images from '../assets/images'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const rooms = [
-  {
-    name: 'Garden Room',
-    size: '38 m²',
-    view: 'Cedar Garden View',
-    desc: 'Warm oak floors and a private reading nook overlooking the old cedar garden.',
-    tone: 'linear-gradient(150deg, rgba(15,63,53,0.94), rgba(23,22,19,0.98))',
-  },
-  {
-    name: 'Aurelia Suite',
-    size: '64 m²',
-    view: 'Panoramic City & Forest View',
-    desc: 'A sculptural freestanding tub, private terrace, and dressing room in warm champagne tones.',
-    tone: 'linear-gradient(150deg, rgba(198,162,92,0.5), rgba(23,22,19,0.98))',
-  },
-  {
-    name: 'The Penthouse',
-    size: '128 m²',
-    view: 'Rooftop Terrace & Skyline',
-    desc: 'Our signature residence — a private rooftop terrace, fireplace lounge, and butler service.',
-    tone: 'linear-gradient(150deg, rgba(10,44,37,0.96), rgba(198,162,92,0.35))',
-  },
+interface Room {
+  name: string
+  size: string
+  view: string
+  desc: string
+}
+
+const tones = [
+  'linear-gradient(150deg, rgba(15,63,53,0.94), rgba(23,22,19,0.98))',
+  'linear-gradient(150deg, rgba(198,162,92,0.5), rgba(23,22,19,0.98))',
+  'linear-gradient(150deg, rgba(10,44,37,0.96), rgba(198,162,92,0.35))',
 ]
 
 export default function Rooms() {
+  const { t } = useLanguage()
+  const rooms = t<Room[]>('rooms.items')
+
   return (
     <Box id="rooms" component="section" sx={{ background: '#171613', py: { xs: 12, md: 18 } }}>
       <Box sx={{ px: { xs: 3, md: 8 }, mb: { xs: 6, md: 9 } }}>
         <Reveal>
-          <Typography className="eyebrow" sx={{ mb: 2 }}>Luxury Rooms &amp; Suites</Typography>
+          <Typography className="eyebrow" sx={{ mb: 2 }}>{t('rooms.eyebrow')}</Typography>
         </Reveal>
         <Reveal delay={0.1}>
           <Typography variant="h2" sx={{ fontSize: { xs: '2.4rem', md: '3.6rem' }, maxWidth: 720 }}>
-            Rest, exactly as you imagined it.
+            {t('rooms.title')}
           </Typography>
         </Reveal>
       </Box>
@@ -61,7 +54,7 @@ export default function Rooms() {
                 height: { xs: 460, md: 560 },
                 borderRadius: '28px',
                 overflow: 'hidden',
-                background: room.tone,
+                background: tones[i % tones.length],
                 border: '1px solid rgba(228,200,138,0.15)',
                 display: 'flex',
                 flexDirection: 'column',
@@ -88,7 +81,7 @@ export default function Rooms() {
                 sx={{
                   position: 'absolute',
                   top: 24,
-                  left: 24,
+                  insetInlineStart: 24,
                   background: 'rgba(23,22,19,0.55)',
                   color: '#E4C88A',
                   border: '1px solid rgba(228,200,138,0.3)',
@@ -112,7 +105,7 @@ export default function Rooms() {
                     href="#booking"
                     sx={{ fontSize: '0.85rem', textDecoration: 'underline', textUnderlineOffset: 4, color: '#F7F4EE' }}
                   >
-                    View Availability
+                    {t('rooms.cta')}
                   </Typography>
                 </Stack>
               </Box>

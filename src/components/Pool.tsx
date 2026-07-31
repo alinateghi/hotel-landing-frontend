@@ -3,10 +3,12 @@ import { Box, Typography, Button } from '@mui/material'
 import { motion } from 'framer-motion'
 import { useScrollScene } from '../hooks/useGsap'
 import Reveal from './Reveal'
+import { useLanguage } from '../i18n/LanguageContext'
 
 export default function Pool() {
   const rootRef = useRef<HTMLElement>(null!)
   const textRef = useRef<HTMLDivElement>(null!)
+  const { t } = useLanguage()
 
   useScrollScene(rootRef, ({ gsap }) => {
     gsap.fromTo(
@@ -37,7 +39,6 @@ export default function Pool() {
           'linear-gradient(180deg, #0A2C25 0%, #0F3F35 35%, #0B2C26 70%, #171613 100%)',
       }}
     >
-      {/* animated caustic-light shimmer bands, evoking sunlight on water */}
       {[...Array(5)].map((_, i) => (
         <Box
           key={i}
@@ -47,7 +48,7 @@ export default function Pool() {
           sx={{
             position: 'absolute',
             top: `${i * 18}%`,
-            left: 0,
+            insetInlineStart: 0,
             width: '140%',
             height: 2,
             background: 'linear-gradient(90deg, transparent, rgba(228,200,138,0.5), transparent)',
@@ -58,14 +59,14 @@ export default function Pool() {
 
       <Box ref={textRef} sx={{ position: 'relative', zIndex: 1, textAlign: 'center', px: 3 }}>
         <Reveal>
-          <Typography className="eyebrow" sx={{ mb: 2 }}>Swimming Pool</Typography>
+          <Typography className="eyebrow" sx={{ mb: 2 }}>{t('pool.eyebrow')}</Typography>
         </Reveal>
         <Reveal delay={0.1}>
           <Typography
             variant="h2"
-            sx={{ fontSize: { xs: '2.6rem', sm: '4rem', md: '5.4rem' }, mb: 3, maxWidth: 900 }}
+            sx={{ fontSize: { xs: '2.6rem', sm: '4rem', md: '5.4rem' }, mb: 3, maxWidth: 900, mx: 'auto' }}
           >
-            Float, beneath open sky.
+            {t('pool.title')}
           </Typography>
         </Reveal>
         <Reveal delay={0.2}>
@@ -73,8 +74,7 @@ export default function Pool() {
             variant="body1"
             sx={{ color: 'text.secondary', maxWidth: 520, mx: 'auto', mb: 5, fontSize: '1.05rem', lineHeight: 1.85 }}
           >
-            A 25-metre infinity pool traces the tree line, warmed year-round, with a submerged
-            lounge deck and private cabanas for slow afternoons.
+            {t('pool.description')}
           </Typography>
         </Reveal>
         <Reveal delay={0.3}>
@@ -84,7 +84,7 @@ export default function Pool() {
             size="large"
             sx={{ borderColor: 'rgba(228,200,138,0.5)', color: '#E4C88A', '&:hover': { borderColor: '#E4C88A' } }}
           >
-            Explore Facilities
+            {t('pool.cta')}
           </Button>
         </Reveal>
       </Box>

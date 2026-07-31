@@ -6,17 +6,16 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import Reveal from './Reveal'
 import images from '../assets/images'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const photos = [
-  { src: images.lobbyWide, alt: 'Lobby lounge beneath the sculpted timber ceiling', span: 2 },
-  { src: images.lobbyReceptionDesk, alt: 'Reception desk with backlit sculptural panels', span: 1 },
-  { src: images.lobbySeating, alt: 'Lobby seating nook, vertical view', span: 1 },
-  { src: images.lobbyLounge, alt: 'Emerald velvet lounge seating', span: 1 },
-  { src: images.lobbyReceptionWide, alt: 'Reception hall, wide view', span: 2 },
-]
+const sources = [images.lobbyWide, images.lobbyReceptionDesk, images.lobbySeating, images.lobbyLounge, images.lobbyReceptionWide]
+const spans = [2, 1, 1, 1, 2]
 
 export default function Gallery() {
   const [index, setIndex] = useState<number | null>(null)
+  const { t } = useLanguage()
+  const alts = t<string[]>('gallery.alts')
+  const photos = sources.map((src, i) => ({ src, alt: alts[i], span: spans[i] }))
 
   const close = () => setIndex(null)
   const prev = () => setIndex((i) => (i === null ? null : (i + photos.length - 1) % photos.length))
@@ -25,11 +24,11 @@ export default function Gallery() {
   return (
     <Box id="gallery" component="section" sx={{ background: '#0F0E0C', py: { xs: 12, md: 18 }, px: { xs: 3, md: 8 } }}>
       <Reveal>
-        <Typography className="eyebrow" sx={{ mb: 2 }}>Gallery</Typography>
+        <Typography className="eyebrow" sx={{ mb: 2 }}>{t('gallery.eyebrow')}</Typography>
       </Reveal>
       <Reveal delay={0.1}>
         <Typography variant="h2" sx={{ fontSize: { xs: '2.4rem', md: '3.6rem' }, mb: { xs: 6, md: 9 }, maxWidth: 720 }}>
-          A closer look inside.
+          {t('gallery.title')}
         </Typography>
       </Reveal>
 
@@ -76,7 +75,7 @@ export default function Gallery() {
                   p: 2.5,
                 }}
               >
-                <Typography sx={{ fontSize: '0.85rem', color: '#F7F4EE' }}>View</Typography>
+                <Typography sx={{ fontSize: '0.85rem', color: '#F7F4EE' }}>{t('gallery.view')}</Typography>
               </Box>
             </Box>
           </Reveal>
@@ -100,13 +99,13 @@ export default function Gallery() {
                 alt={photos[index].alt}
                 sx={{ maxWidth: '90vw', maxHeight: '86vh', borderRadius: '14px', display: 'block' }}
               />
-              <IconButton onClick={close} sx={{ position: 'absolute', top: -48, right: 0, color: '#F7F4EE' }}>
+              <IconButton onClick={close} sx={{ position: 'absolute', top: -48, insetInlineEnd: 0, color: '#F7F4EE' }}>
                 <CloseIcon />
               </IconButton>
-              <IconButton onClick={prev} sx={{ position: 'absolute', left: -60, top: '50%', transform: 'translateY(-50%)', color: '#F7F4EE', display: { xs: 'none', md: 'flex' } }}>
+              <IconButton onClick={prev} sx={{ position: 'absolute', insetInlineStart: -60, top: '50%', transform: 'translateY(-50%)', color: '#F7F4EE', display: { xs: 'none', md: 'flex' } }}>
                 <ArrowBackIosNewIcon />
               </IconButton>
-              <IconButton onClick={next} sx={{ position: 'absolute', right: -60, top: '50%', transform: 'translateY(-50%)', color: '#F7F4EE', display: { xs: 'none', md: 'flex' } }}>
+              <IconButton onClick={next} sx={{ position: 'absolute', insetInlineEnd: -60, top: '50%', transform: 'translateY(-50%)', color: '#F7F4EE', display: { xs: 'none', md: 'flex' } }}>
                 <ArrowForwardIosIcon />
               </IconButton>
             </motion.div>

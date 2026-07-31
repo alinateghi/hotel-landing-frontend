@@ -2,8 +2,11 @@ import { Box, Typography, Button, Grid, TextField, MenuItem } from '@mui/materia
 import { motion } from 'framer-motion'
 import Reveal from './Reveal'
 import images from '../assets/images'
+import { useLanguage } from '../i18n/LanguageContext'
 
 export default function BookingCTA() {
+  const { t } = useLanguage()
+
   return (
     <Box
       id="booking"
@@ -21,17 +24,16 @@ export default function BookingCTA() {
       <Grid container spacing={6} alignItems="center">
         <Grid item xs={12} md={6}>
           <Reveal>
-            <Typography className="eyebrow" sx={{ mb: 2 }}>Your Stay Awaits</Typography>
+            <Typography className="eyebrow" sx={{ mb: 2 }}>{t('booking.eyebrow')}</Typography>
           </Reveal>
           <Reveal delay={0.1}>
             <Typography variant="h2" sx={{ fontSize: { xs: '2.6rem', md: '4rem' }, mb: 3 }}>
-              Begin your journey at Aurelia.
+              {t('booking.title')}
             </Typography>
           </Reveal>
           <Reveal delay={0.2}>
             <Typography variant="body1" sx={{ color: 'text.secondary', maxWidth: 460, fontSize: '1.05rem', lineHeight: 1.85 }}>
-              Complimentary breakfast, early check-in, and a welcome ritual await every direct
-              reservation — available exclusively through our own front desk.
+              {t('booking.description')}
             </Typography>
           </Reveal>
         </Grid>
@@ -51,7 +53,7 @@ export default function BookingCTA() {
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <TextField
-                    label="Check-in"
+                    label={t('booking.checkIn')}
                     type="date"
                     fullWidth
                     InputLabelProps={{ shrink: true }}
@@ -61,7 +63,7 @@ export default function BookingCTA() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    label="Check-out"
+                    label={t('booking.checkOut')}
                     type="date"
                     fullWidth
                     InputLabelProps={{ shrink: true }}
@@ -70,9 +72,11 @@ export default function BookingCTA() {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField select label="Guests" defaultValue="2" fullWidth variant="filled" size="small">
+                  <TextField select label={t('booking.guests')} defaultValue="2" fullWidth variant="filled" size="small">
                     {[1, 2, 3, 4].map((n) => (
-                      <MenuItem key={n} value={n}>{n} Guest{n > 1 ? 's' : ''}</MenuItem>
+                      <MenuItem key={n} value={n}>
+                        {n} {n > 1 ? t('booking.guestLabelPlural') : t('booking.guestLabel')}
+                      </MenuItem>
                     ))}
                   </TextField>
                 </Grid>
@@ -94,7 +98,7 @@ export default function BookingCTA() {
                       '&:hover': { background: 'linear-gradient(135deg, #F0DBAA, #D3AE6C)' },
                     }}
                   >
-                    Check Availability
+                    {t('booking.submit')}
                   </Button>
                 </Grid>
               </Grid>

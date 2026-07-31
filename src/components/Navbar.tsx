@@ -1,27 +1,57 @@
 import { useEffect, useState } from 'react'
-import { Box, Stack, Typography, Button, IconButton, Drawer } from '@mui/material'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Box, Stack, Typography, Button, IconButton, Drawer, ButtonBase } from '@mui/material'
+import { motion } from 'framer-motion'
 import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const links = [
-  { label: 'About', href: '#about' },
-  { label: 'Rooms', href: '#rooms' },
-  { label: 'Restaurant', href: '#restaurant' },
-  { label: 'Spa', href: '#spa' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'Reviews', href: '#reviews' },
-]
+interface NavLink {
+  label: string
+  href: string
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const { t, language, setLanguage } = useLanguage()
+  const links = t<NavLink[]>('nav.links')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const LanguageSwitch = () => (
+    <Stack
+      direction="row"
+      sx={{
+        border: '1px solid rgba(228,200,138,0.3)',
+        borderRadius: 100,
+        p: 0.4,
+        gap: 0.4,
+      }}
+    >
+      {(['en', 'fa'] as const).map((code) => (
+        <ButtonBase
+          key={code}
+          onClick={() => setLanguage(code)}
+          sx={{
+            px: 1.6,
+            py: 0.4,
+            borderRadius: 100,
+            fontSize: '0.75rem',
+            letterSpacing: '0.06em',
+            color: language === code ? '#171613' : '#E4C88A',
+            background: language === code ? 'linear-gradient(135deg, #E4C88A, #C6A25C)' : 'transparent',
+            transition: 'all 0.3s ease',
+          }}
+        >
+          {code === 'en' ? 'EN' : 'فا'}
+        </ButtonBase>
+      ))}
+    </Stack>
+  )
 
   return (
     <Box
@@ -32,8 +62,7 @@ export default function Navbar() {
       sx={{
         position: 'fixed',
         top: 0,
-        left: 0,
-        right: 0,
+        insetInline: 0,
         zIndex: 1200,
         px: { xs: 3, md: 6 },
         py: scrolled ? 1.6 : 2.8,
@@ -73,7 +102,7 @@ export default function Navbar() {
               '&::after': {
                 content: '""',
                 position: 'absolute',
-                left: 0,
+                insetInlineStart: 0,
                 bottom: -4,
                 height: '1px',
                 width: 0,
@@ -87,18 +116,20 @@ export default function Navbar() {
         ))}
       </Stack>
 
-      <Button
-        variant="outlined"
-        href="#booking"
-        sx={{
-          display: { xs: 'none', md: 'inline-flex' },
-          borderColor: '#C6A25C',
-          color: '#E4C88A',
-          '&:hover': { borderColor: '#E4C88A', background: 'rgba(198,162,92,0.08)' },
-        }}
-      >
-        Reserve
-      </Button>
+      <Stack direction="row" spacing={2} alignItems="center" sx={{ display: { xs: 'none', md: 'flex' } }}>
+        <LanguageSwitch />
+        <Button
+          variant="outlined"
+          href="#booking"
+          sx={{
+            borderColor: '#C6A25C',
+            color: '#E4C88A',
+            '&:hover': { borderColor: '#E4C88A', background: 'rgba(198,162,92,0.08)' },
+          }}
+        >
+          {t('nav.reserve')}
+        </Button>
+      </Stack>
 
       <IconButton
         onClick={() => setOpen(true)}
@@ -107,11 +138,14 @@ export default function Navbar() {
         <MenuIcon />
       </IconButton>
 
-      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+      <Drawer anchor={language === 'fa' ? 'left' : 'right'} open={open} onClose={() => setOpen(false)}>
         <Box sx={{ width: 280, height: '100%', background: '#171613', p: 4 }}>
-          <IconButton onClick={() => setOpen(false)} sx={{ color: '#F7F4EE', mb: 4 }}>
-            <CloseIcon />
-          </IconButton>
+          <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
+            <IconButton onClick={() => setOpen(false)} sx={{ color: '#F7F4EE' }}>
+              <CloseIcon />
+            </IconButton>
+            <LanguageSwitch />
+          </Stack>
           <Stack spacing={3}>
             {links.map((l) => (
               <Typography
@@ -131,7 +165,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               sx={{ background: '#C6A25C', color: '#171613', mt: 2 }}
             >
-              Reserve
+              {t('nav.reserve')}
             </Button>
           </Stack>
         </Box>

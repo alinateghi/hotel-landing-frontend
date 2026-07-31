@@ -1,14 +1,17 @@
 import { Box, Grid, Typography, Stack } from '@mui/material'
 import Reveal from './Reveal'
 import images from '../assets/images'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const stats = [
-  { value: '48', label: 'Suites & Residences' },
-  { value: '1', label: 'Michelin-noted Table' },
-  { value: '120', label: 'Years of Craft' },
-]
+interface Stat {
+  value: string
+  label: string
+}
 
 export default function About() {
+  const { t } = useLanguage()
+  const stats = t<Stat[]>('about.stats')
+
   return (
     <Box
       id="about"
@@ -23,24 +26,21 @@ export default function About() {
       <Grid container spacing={{ xs: 6, md: 10 }} alignItems="center">
         <Grid item xs={12} md={6}>
           <Reveal>
-            <Typography className="eyebrow" sx={{ mb: 2 }}>The Philosophy</Typography>
+            <Typography className="eyebrow" sx={{ mb: 2 }}>{t('about.eyebrow')}</Typography>
           </Reveal>
           <Reveal delay={0.1}>
-            <Typography variant="h2" sx={{ fontSize: { xs: '2.4rem', md: '3.4rem' }, mb: 4, lineHeight: 1.1 }}>
-              Designed for those who notice the details.
+            <Typography variant="h2" sx={{ fontSize: { xs: '2.4rem', md: '3.4rem' }, mb: 4, lineHeight: 1.2 }}>
+              {t('about.title')}
             </Typography>
           </Reveal>
           <Reveal delay={0.2}>
             <Typography variant="body1" sx={{ color: 'text.secondary', mb: 3, fontSize: '1.05rem', lineHeight: 1.85, maxWidth: 520 }}>
-              Aurelia was conceived as a slow architectural gesture — sculpted timber ceilings
-              that ripple like water, hand-finished plaster walls lit from within, and a palette
-              of deep emerald and warm gold drawn from the forest just beyond our windows.
+              {t('about.p1')}
             </Typography>
           </Reveal>
           <Reveal delay={0.3}>
             <Typography variant="body1" sx={{ color: 'text.secondary', mb: 6, fontSize: '1.05rem', lineHeight: 1.85, maxWidth: 520 }}>
-              Every space was designed as part of a single, continuous journey — one that
-              begins the moment you step through our doors, and lingers long after you leave.
+              {t('about.p2')}
             </Typography>
           </Reveal>
 
@@ -51,7 +51,7 @@ export default function About() {
                   <Typography variant="h3" sx={{ color: '#E4C88A', fontSize: { xs: '2rem', md: '2.6rem' } }}>
                     {s.value}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary', maxWidth: 110 }}>
+                  <Typography variant="body2" sx={{ color: 'text.secondary', maxWidth: 120 }}>
                     {s.label}
                   </Typography>
                 </Box>
@@ -74,7 +74,7 @@ export default function About() {
               <Box
                 component="img"
                 src={images.lobbyReceptionWide}
-                alt="Aurelia reception hall with sculptural timber ceiling"
+                alt={t('gallery.alts.1')}
                 loading="lazy"
                 sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
@@ -99,7 +99,7 @@ export default function About() {
                 }}
               >
                 <Typography sx={{ fontSize: '0.75rem', letterSpacing: '0.08em', color: '#E4C88A' }}>
-                  Est. 1904 · Reimagined 2024
+                  {t('about.imageBadge')}
                 </Typography>
               </Box>
             </Box>

@@ -1,33 +1,25 @@
 import { Box, Typography, Grid, Rating } from '@mui/material'
 import Reveal from './Reveal'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const reviews = [
-  {
-    quote: 'The kind of hotel you remember years later — not because it tried hard, but because it never had to.',
-    name: 'Isabelle M.',
-    trip: 'Anniversary Stay',
-  },
-  {
-    quote: 'From the lobby ceiling to the last cup of coffee, every detail felt considered. Genuinely restorative.',
-    name: 'Daniel K.',
-    trip: 'Solo Retreat',
-  },
-  {
-    quote: 'Quiet luxury, done properly. The spa alone is worth the trip back.',
-    name: 'Amara T.',
-    trip: 'Wellness Weekend',
-  },
-]
+interface Review {
+  quote: string
+  name: string
+  trip: string
+}
 
 export default function Testimonials() {
+  const { t } = useLanguage()
+  const reviews = t<Review[]>('testimonials.reviews')
+
   return (
     <Box id="reviews" component="section" sx={{ background: '#171613', py: { xs: 12, md: 18 }, px: { xs: 3, md: 8 } }}>
       <Reveal>
-        <Typography className="eyebrow" sx={{ mb: 2 }}>Guest Reviews</Typography>
+        <Typography className="eyebrow" sx={{ mb: 2 }}>{t('testimonials.eyebrow')}</Typography>
       </Reveal>
       <Reveal delay={0.1}>
         <Typography variant="h2" sx={{ fontSize: { xs: '2.4rem', md: '3.6rem' }, mb: { xs: 6, md: 9 }, maxWidth: 720 }}>
-          Told, in their own words.
+          {t('testimonials.title')}
         </Typography>
       </Reveal>
 

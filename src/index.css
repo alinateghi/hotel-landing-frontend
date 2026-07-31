@@ -33,12 +33,16 @@ body {
 }
 
 .eyebrow {
-  font-family: 'Inter', sans-serif;
   font-size: 0.78rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: #C6A25C;
   font-weight: 500;
+}
+
+/* Persian eyebrow text reads better with tighter tracking than the Latin version */
+html[lang='fa'] .eyebrow {
+  letter-spacing: 0.05em;
 }
 
 .reveal-mask {
