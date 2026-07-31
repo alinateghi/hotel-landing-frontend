@@ -1,0 +1,45 @@
+# Deploy as a Portainer Stack. Before deploying:
+#   1. Change the Host(`...`) rule below to your real domain.
+#   2. Set `certresolver` to match the resolver name configured in your
+#      Traefik instance (commonly "letsencrypt" or "le").
+#   3. Make sure the external network name below matches the network your
+#      Traefik container is attached to (check in Portainer > Networks).
+#      If Traefik is on the default "traefik" network, no change is needed.
+
+services:
+  shahrood-hotel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: shahrood-hotel:latest
+    container_name: shahrood-hotel
+    restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+
+      # HTTP -> HTTPS redirect (skip these two lines if Traefik already
+      # handles global redirect via entrypoints)
+      - "traefik.http.routers.shahrood-hotel-http.rule=Host(`hotelshahrood.ir`)"
+      - "traefik.http.routers.shahrood-hotel-http.entrypoints=web"
+      - "traefik.http.routers.shahrood-hotel-http.middlewares=shahrood-hotel-https-redirect"
+      - "traefik.http.middlewares.shahrood-hotel-https-redirect.redirectscheme.scheme=https"
+
+      # HTTPS router
+      - "traefik.http.routers.shahrood-hotel.rule=Host(`hotelshahrood.ir`)"
+      - "traefik.http.routers.shahrood-hotel.entrypoints=websecure"
+      - "traefik.http.routers.shahrood-hotel.tls=true"
+      - "traefik.http.routers.shahrood-hotel.tls.certresolver=letsencrypt"
+
+      # Container port nginx listens on
+      - "traefik.http.services.shahrood-hotel.loadbalancer.server.port=80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  traefik:
+    external: true
