@@ -1,4 +1,4 @@
-# Aurelia — Luxury Hotel Landing Page
+# Shahrood Hotel — Luxury Hotel Landing Page
 
 A cinematic, scroll-driven one-page hotel site built with React, TypeScript,
 Material UI, Framer Motion and GSAP ScrollTrigger. Every section is designed

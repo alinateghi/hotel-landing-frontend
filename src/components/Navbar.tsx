@@ -82,7 +82,7 @@ export default function Navbar() {
           fontSize: { xs: '1.3rem', md: '1.5rem' },
         }}
       >
-        AURELIA
+        {t('brand.wordmark')}
       </Typography>
 
       <Stack direction="row" spacing={4} sx={{ display: { xs: 'none', md: 'flex' } }}>

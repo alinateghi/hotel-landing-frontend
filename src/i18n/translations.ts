@@ -2,6 +2,10 @@ export type Language = 'en' | 'fa'
 
 export const translations = {
   en: {
+    brand: {
+      name: 'Shahrood Hotel',
+      wordmark: 'SHAHROOD',
+    },
     nav: {
       links: [
         { label: 'About', href: '#about' },
@@ -14,10 +18,10 @@ export const translations = {
       reserve: 'Reserve',
     },
     hero: {
-      eyebrow: 'Aurelia Hotel & Residences',
+      eyebrow: 'Shahrood Hotel & Residences',
       headline: ['A Quiet', 'Kind of', 'Luxury.'],
       description:
-        'Nestled between old cedar and quiet water, Aurelia is an invitation to slow down — where every room, every meal, every hour is composed with care.',
+        'Nestled between old cedar and quiet water, Shahrood Hotel is an invitation to slow down — where every room, every meal, every hour is composed with care.',
       cta: 'Reserve Your Stay',
       secondaryCta: 'Discover the Hotel',
       scroll: 'SCROLL',
@@ -25,7 +29,7 @@ export const translations = {
     about: {
       eyebrow: 'The Philosophy',
       title: 'Designed for those who notice the details.',
-      p1: 'Aurelia was conceived as a slow architectural gesture — sculpted timber ceilings that ripple like water, hand-finished plaster walls lit from within, and a palette of deep emerald and warm gold drawn from the forest just beyond our windows.',
+      p1: 'Shahrood Hotel was conceived as a slow architectural gesture — sculpted timber ceilings that ripple like water, hand-finished plaster walls lit from within, and a palette of deep emerald and warm gold drawn from the forest just beyond our windows.',
       p2: 'Every space was designed as part of a single, continuous journey — one that begins the moment you step through our doors, and lingers long after you leave.',
       stats: [
         { value: '48', label: 'Suites & Residences' },
@@ -56,7 +60,7 @@ export const translations = {
           desc: 'Warm oak floors and a private reading nook overlooking the old cedar garden.',
         },
         {
-          name: 'Aurelia Suite',
+          name: 'Shahrood Suite',
           size: '64 m²',
           view: 'Panoramic City & Forest View',
           desc: 'A sculptural freestanding tub, private terrace, and dressing room in warm champagne tones.',
@@ -147,7 +151,7 @@ export const translations = {
     },
     booking: {
       eyebrow: 'Your Stay Awaits',
-      title: 'Begin your journey at Aurelia.',
+      title: 'Begin your journey at Shahrood Hotel.',
       description:
         'Complimentary breakfast, early check-in, and a welcome ritual await every direct reservation — available exclusively through our own front desk.',
       checkIn: 'Check-in',
@@ -163,7 +167,7 @@ export const translations = {
       hotelHeading: 'HOTEL',
       hotelLinks: ['Gallery', 'Reviews', 'Careers', 'Press'],
       connectedHeading: 'STAY CONNECTED',
-      email: 'reservations@aurelia-hotel.com',
+      email: 'reservations@shahroodhotel.com',
       phone: '+1 (555) 019 4821',
       rights: 'All rights reserved.',
       privacy: 'Privacy',
@@ -171,6 +175,10 @@ export const translations = {
     },
   },
   fa: {
+    brand: {
+      name: 'هتل شاهرود',
+      wordmark: 'شاهرود',
+    },
     nav: {
       links: [
         { label: 'درباره ما', href: '#about' },
@@ -183,10 +191,10 @@ export const translations = {
       reserve: 'رزرو',
     },
     hero: {
-      eyebrow: 'هتل و اقامتگاه آورلیا',
+      eyebrow: 'هتل شاهرود',
       headline: ['سکوتی', 'به وسعتِ', 'تجمل.'],
       description:
-        'میان درختان کهن سرو و آبی آرام، آورلیا دعوتی‌ست به آرام‌گرفتن؛ جایی که هر اتاق، هر وعده غذا و هر ساعت با دقتی خاص ساخته شده است.',
+        'میان درختان کهن سرو و آبی آرام، هتل شاهرود دعوتی‌ست به آرام‌گرفتن؛ جایی که هر اتاق، هر وعده غذا و هر ساعت با دقتی خاص ساخته شده است.',
       cta: 'رزرو اقامت',
       secondaryCta: 'آشنایی با هتل',
       scroll: 'اسکرول کنید',
@@ -194,7 +202,7 @@ export const translations = {
     about: {
       eyebrow: 'فلسفه ما',
       title: 'طراحی‌شده برای آنان که جزئیات را می‌بینند.',
-      p1: 'آورلیا با حرکتی معماری و آرام شکل گرفته است؛ سقف‌های چوبیِ موج‌دار همچون آب، دیوارهای گچی دست‌ساز که از درون نورپردازی شده‌اند، و پالتی از سبز عمیق و طلایی گرم، الهام‌گرفته از جنگل پشت پنجره‌های ما.',
+      p1: 'هتل شاهرود با حرکتی معماری و آرام شکل گرفته است؛ سقف‌های چوبیِ موج‌دار همچون آب، دیوارهای گچی دست‌ساز که از درون نورپردازی شده‌اند، و پالتی از سبز عمیق و طلایی گرم، الهام‌گرفته از جنگل پشت پنجره‌های ما.',
       p2: 'هر فضا بخشی از یک سفر پیوسته است؛ سفری که از لحظه‌ی ورود شما آغاز می‌شود و مدت‌ها پس از خروج، در خاطر می‌ماند.',
       stats: [
         { value: '۴۸', label: 'سوئیت و اقامتگاه' },
@@ -225,7 +233,7 @@ export const translations = {
           desc: 'کف‌پوش گرم چوب بلوط و گوشه‌ای خصوصی برای مطالعه، رو به باغ کهن سرو.',
         },
         {
-          name: 'سوئیت آورلیا',
+          name: 'سوئیت شاهرود',
           size: '۶۴ متر مربع',
           view: 'منظره پانوراما شهر و جنگل',
           desc: 'وان مجسمه‌وارِ مستقل، تراس اختصاصی و اتاق لباس با رنگ‌های گرم شامپاینی.',
@@ -314,7 +322,7 @@ export const translations = {
     },
     booking: {
       eyebrow: 'اقامت شما در انتظار است',
-      title: 'سفر خود را در آورلیا آغاز کنید.',
+      title: 'سفر خود را در هتل شاهرود آغاز کنید.',
       description:
         'صبحانه رایگان، ورود زودهنگام و آیین خوش‌آمدگویی، در انتظار هر رزرو مستقیم است — تنها از طریق پذیرش خودمان.',
       checkIn: 'ورود',
@@ -330,7 +338,7 @@ export const translations = {
       hotelHeading: 'هتل',
       hotelLinks: ['گالری', 'نظرات', 'فرصت‌های شغلی', 'مطبوعات'],
       connectedHeading: 'در ارتباط باشید',
-      email: 'reservations@aurelia-hotel.com',
+      email: 'reservations@shahroodhotel.com',
       phone: '+1 (555) 019 4821',
       rights: 'تمامی حقوق محفوظ است.',
       privacy: 'حریم خصوصی',

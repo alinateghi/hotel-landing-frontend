@@ -20,7 +20,7 @@ export default function Footer() {
       <Grid container spacing={6}>
         <Grid item xs={12} md={4}>
           <Reveal>
-            <Typography variant="h4" sx={{ letterSpacing: '0.1em', mb: 2 }}>AURELIA</Typography>
+            <Typography variant="h4" sx={{ letterSpacing: '0.1em', mb: 2 }}>{t('brand.wordmark')}</Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary', maxWidth: 280, lineHeight: 1.8 }}>
               {t('footer.description')}
             </Typography>
@@ -71,7 +71,7 @@ export default function Footer() {
 
       <Box sx={{ mt: { xs: 8, md: 10 }, pt: 3, borderTop: '1px solid rgba(228,200,138,0.1)', display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'space-between' }}>
         <Typography variant="body2" sx={{ color: 'rgba(247,244,238,0.4)', fontSize: '0.82rem' }}>
-          © {new Date().getFullYear()} AURELIA — {t('footer.rights')}
+          © {new Date().getFullYear()} {t('brand.wordmark')} — {t('footer.rights')}
         </Typography>
         <Stack direction="row" spacing={3}>
           <Typography variant="body2" component="a" href="#" sx={{ color: 'rgba(247,244,238,0.4)', fontSize: '0.82rem', textDecoration: 'none' }}>{t('footer.privacy')}</Typography>
