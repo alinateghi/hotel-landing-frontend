@@ -74,7 +74,7 @@ export default function About() {
               <Box
                 component="img"
                 src={images.lobbyReceptionWide}
-                alt={t('gallery.alts.1')}
+                alt={t<string>('gallery.alts.1')}
                 loading="lazy"
                 sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
